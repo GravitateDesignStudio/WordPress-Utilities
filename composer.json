@@ -1,0 +1,14 @@
+{
+    "name": "Gravitate Word Press Utilities",
+    "description": "Provides General WordPress Support",
+    "type": "library",
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Grav\\WordPressUtilities\\": "src/"
+        }
+    }
+}
