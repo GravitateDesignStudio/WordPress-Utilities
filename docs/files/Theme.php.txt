@@ -76,7 +76,7 @@ class Theme {
 	 * @return void
 	 * @author GG
 	 *
-	 * @example code_examples/Theme/add_theme_support.txt Example #1 Running the function in a WordPress hook
+	 * @example examples/Theme/add_theme_support.txt Example #1 Running the function in a WordPress hook
 	 *
 	 */
 	public static function after_setup_configuration()
@@ -133,7 +133,7 @@ class Theme {
      * @access public
      * @see after_setup_configuration()
      *
-     * @example code_examples/Theme/get_default_menus.txt Example #1 - Using the Filter
+     * @example examples/Theme/get_default_menus.txt Example #1 - Using the Filter
      *
      * @uses grav_wp_default_menus
      * @return array
