@@ -1,0 +1,9 @@
+
+add_filter('grav_wp_default_menus', 'grav_default_menus');
+
+function grav_default_menus($menus)
+{
+    $menus['new-menu'] = 'My New Menu';
+
+    return $menus;
+}

@@ -41,4 +41,3 @@ error_log
 access_log
 .sass-cache
 node_modules
-code_examples
