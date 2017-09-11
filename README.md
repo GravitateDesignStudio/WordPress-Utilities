@@ -1,9 +1,5 @@
-# WordPress-Utilities
-General WordPress Utilities and Functions
+# Gravitate Utilities
 
+A collection of WordPress, vendor, and development classes that can be used within the Gravitate WP theme.
 
-### Dev Requirements
-* All classes must be in the classes/ folder and must be in the root of the classes folder.  No sub directories or additional structures.
-* All Classes must use the namespace Grav\WordPressUtilities.
-* All Classes should be unique and do not conflict with other naming conventions (ie. SVG, Media, Video, ImageSupport, etc) All Methods should be under the "Media" class.
-* ...
+Additional information will be added to this repo soon.
