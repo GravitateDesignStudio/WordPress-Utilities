@@ -1,5 +1,5 @@
 <?php
-namespace Grav\WordPressUtilities;
+namespace Grav\WP;
 
 class Arrays {
 	public static function us_states() {

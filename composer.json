@@ -1,6 +1,6 @@
 {
-    "name": "Gravitate Word Press Utilities",
-    "description": "Provides General WordPress Support",
+    "name": "gravitate/grav-util",
+    "description": "Gravitate theme utilities and helper classes",
     "type": "library",
     "require": {
         "php": ">=5.4.0",
@@ -9,7 +9,9 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Grav\\WordPressUtilities\\": "classes/"
+            "Grav\\WP\\": "classes/wp/",
+            "Grav\\Dev\\": "classes/dev/",
+            "Grav\\Vendor\\": "classes/vendor/"
         }
     }
 }

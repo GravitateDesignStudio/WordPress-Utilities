@@ -1,5 +1,5 @@
 <?php
-namespace Grav\WordPressUtilities;
+namespace Grav\WP;
 
 class Social {
 	static public function share_link($site, $twitter_screen_name='', $post_id=0)

@@ -1,5 +1,5 @@
 <?php
-namespace Grav\WordPressUtilities\Vendor;
+namespace Grav\Vendor;
 
 class GravityForms {
 	private static $_form_choices;

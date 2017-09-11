@@ -1,5 +1,5 @@
 <?php
-namespace Grav\WordPressUtilities;
+namespace Grav\WP;
 
 class ThemeSupport {
 	static public $support_items = [];

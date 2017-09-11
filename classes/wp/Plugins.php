@@ -1,5 +1,5 @@
 <?php
-namespace Grav\WordPressUtilities;
+namespace Grav\WP;
 
 class Plugins {
 	public static function force_activate_plugins($plugins=array()) {

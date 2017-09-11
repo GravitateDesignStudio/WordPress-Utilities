@@ -1,5 +1,5 @@
 <?php
-namespace Grav\WordPressUtilities;
+namespace Grav\WP;
 
 class Util {
 	public static function strip_specific_tags($str, $tags) {

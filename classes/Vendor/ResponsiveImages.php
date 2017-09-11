@@ -1,5 +1,5 @@
 <?php
-namespace Grav\WordPressUtilities\Vendor;
+namespace Grav\Vendor;
 
 class ResponsiveImages {
 	public static function get_default_settings() {

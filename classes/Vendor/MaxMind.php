@@ -1,5 +1,5 @@
 <?php
-namespace Grav\WordPressUtilities\Vendor;
+namespace Grav\Vendor;
 
 class MaxMind {
 	private static $remote_db = 'http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.mmdb.gz';

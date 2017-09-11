@@ -1,5 +1,5 @@
 <?php
-namespace Grav\WordPressUtilities\Dev;
+namespace Grav\Dev;
 
 class Image {
 	public static function local_image_redirect($remote_domain) {

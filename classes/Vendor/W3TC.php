@@ -18,7 +18,7 @@
  * if (file_exists(dirname(ABSPATH).'/vendor/autoload.php')) {
  *     require_once(dirname(ABSPATH).'/vendor/autoload.php');
  *
- *     Grav\WordPressUtilities\Vendor\W3TC::set_values(array(
+ *     Grav\Vendor\W3TC::set_values(array(
  *         'pgcache.enabled' => true,
  *         'dbcache.reject.sql' => array(
  *             'gdsr_',
@@ -31,7 +31,7 @@
  * }
  */
 
-namespace Grav\WordPressUtilities\Vendor;
+namespace Grav\Vendor;
 
 class W3TC {
 	private static $w3tc_config = false;

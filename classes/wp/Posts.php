@@ -5,7 +5,7 @@
  * @author GG
  */
 
-namespace Grav\WordPressUtilities;
+namespace Grav\WP;
 
 /**
  * Posts Class containing all Methods related to Posts

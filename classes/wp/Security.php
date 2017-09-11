@@ -1,5 +1,5 @@
 <?php
-namespace Grav\WordPressUtilities;
+namespace Grav\WP;
 
 class Security {
 	public static function disable_dashboard_access_for_roles($roles) {

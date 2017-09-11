@@ -1,5 +1,5 @@
 <?php
-namespace WPUtil;
+namespace Grav\WP;
 
 class Admin {
 	/**

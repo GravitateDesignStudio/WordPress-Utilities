@@ -1,5 +1,5 @@
 <?php
-namespace Grav\WordPressUtilities;
+namespace Grav\WP;
 
 // A php class to be used with an svg sprite sheet
 class SVG {

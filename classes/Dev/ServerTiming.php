@@ -1,5 +1,5 @@
 <?php
-namespace Grav\WordPressUtilities\Dev;
+namespace Grav\Dev;
 
 class ServerTiming {
 	static private $proc = [];

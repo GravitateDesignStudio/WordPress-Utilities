@@ -1,7 +1,7 @@
 <?php
-namespace Grav\WordPressUtilities\MenuWalker;
+namespace Grav\WP;
 
-class Select extends \Walker_Nav_Menu {
+class MenuWalkerSelect extends \Walker_Nav_Menu {
 
 	public $indent;
 

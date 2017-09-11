@@ -5,7 +5,7 @@
  * @author GG
  */
 
-namespace Grav\WordPressUtilities;
+namespace Grav\WP;
 
 /**
  * Theme Class containing all methods related to Theme

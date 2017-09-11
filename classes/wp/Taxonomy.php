@@ -1,5 +1,5 @@
 <?php
-namespace Grav\WordPressUtilities;
+namespace Grav\WP;
 
 class Taxonomy {
 	public static function register($label_single, $label_plural, $post_types, $options=array()) {
