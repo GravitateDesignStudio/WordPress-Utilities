@@ -62,7 +62,7 @@ class MaxMind {
 		return $record->postal->code ? $record->postal->code : self::$default_location['zip'];
 	}
 
-	private static function get_record_for_IP($ip) {
+	public static function get_record_for_IP($ip) {
 		if (!isset(self::$record_cache[$ip])) {
 			if (!self::$local_db) {
                 error_log(__METHOD__.' - MaxMind DB path not set');
@@ -74,8 +74,6 @@ class MaxMind {
                 return false;
             }
 
-            require_once(trailingslashit(get_template_directory()).'vendor/autoload.php');
-
             try {
 				$reader = new \GeoIp2\Database\Reader(self::$local_db);
 				self::$record_cache[$ip] = $reader->city($ip);
@@ -83,6 +81,7 @@ class MaxMind {
 				return false;
 			}
 		}
+
 		return self::$record_cache[$ip];
 	}
 }
