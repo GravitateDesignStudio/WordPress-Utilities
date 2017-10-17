@@ -37,6 +37,7 @@ class SVG {
         foreach ($svgs as $svg) {
             $id = $svg->getAttribute('id');
             $viewbox = $svg->getAttribute('viewbox');
+            $preserve_aspect_ratio = $svg->getAttribute('preserveaspectratio');
             $markup = '';
 
             foreach ($svg->childNodes as $child) {
@@ -47,7 +48,8 @@ class SVG {
                 self::$symbols[$id] = (object)array(
                     'id' => $id,
                     'viewbox' => $viewbox,
-                    'markup' => $markup
+                    'markup' => $markup,
+                    'preserveAspectRatio' => $preserve_aspect_ratio ? $preserve_aspect_ratio : ''
                 );
             }
         }
@@ -99,12 +101,23 @@ class SVG {
         $class = (isset($opts['class']) && is_string($opts['class'])) ? $opts['class'] : $icon;
         $output = '';
 
+        $attributes = array(
+            'class="'.$class.'"',
+            'viewBox="'.self::$symbols[$icon]->viewbox.'"'
+        );
+
+        if (isset($opts['preserve_aspect_ratio'])) {
+            $attributes[] = 'preserveAspectRatio="'.$opts['preserve_aspect_ratio'].'"';
+        } else if (!isset($opts['preserve_aspect_ratio']) && self::$symbols[$icon]->preserveAspectRatio) {
+            $attributes[] = 'preserveAspectRatio="'.self::$symbols[$icon]->preserveAspectRatio.'"';
+        }
+
         if (isset($opts['no_use']) && $opts['no_use']) {
             // direct output
-            $output = '<svg version="1.1" class="'.$class.'" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="'.self::$symbols[$icon]->viewbox.'" xml:space="preserve">'.self::$symbols[$icon]->markup.'</svg>';
+            $output = '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" xml:space="preserve" '.implode(' ', $attributes).'>'.self::$symbols[$icon]->markup.'</svg>';
         } else {
             // 'use' reference
-            $output = '<svg class="'.$class.'" viewBox="'.self::$symbols[$icon]->viewbox.'"><use xlink:href="#'.$icon.'"></use></svg>';
+            $output = '<svg '.implode(' ', $attributes).'><use xlink:href="#'.$icon.'"></use></svg>';
 
             if (!in_array($icon, self::$use_icon_ids)) {
                 self::$use_icon_ids[] = $icon;

@@ -87,4 +87,67 @@ class Admin {
 		}
 		return false;
 	}
+
+	public static function remove_taxonomy_table_columns($tax_slug, $remove_columns = array()) {
+		add_filter('manage_edit-'.$tax_slug.'_columns', function($columns) use (&$remove_columns) {
+			foreach ($remove_columns as $remove_column) {
+				if (isset($columns[$remove_column])) {
+					unset($columns[$remove_column]);
+				}
+			}
+		
+			return $columns;
+		});
+	}
+
+	public static function remove_taxonomy_editor_fields($tax_slug, $remove_fields = array()) {
+		$classes = array();
+
+		foreach ($remove_fields as $field) {
+			$classes[] = '.term-'.$field.'-wrap';
+		}
+
+		add_action('admin_print_styles', function() use (&$classes, &$tax_slug) {
+			$current_screen = get_current_screen();
+		
+			if ($current_screen->id == 'edit-'.$tax_slug) {
+				?>
+				<style><?php echo esc_attr(implode(', ', $classes)); ?> { display:none; }</style>
+				<?php
+			}
+		}, 999);
+	}
+
+	public static function remove_table_columns($post_type, $remove_ids = array()) {
+		add_filter('manage_'.$post_type.'_posts_columns', function($defaults) use (&$remove_ids) {
+			foreach ($remove_ids as $remove_id) {
+				if (isset($defaults[$remove_id])) {
+					unset($defaults[$remove_id]);
+				}
+			}
+
+			return $defaults;
+		}, 10);
+	}
+
+	public static function add_table_columns($post_type, $new_columns = array()) {
+		add_filter('manage_'.$post_type.'_posts_columns', function($defaults) use (&$new_columns) {
+			foreach (array_keys($new_columns) as $col_name) {
+				$col_key = strtolower(preg_replace('/[^\da-z]/i', '', $col_name));
+				
+				$defaults[$col_key] = $col_name;
+			}
+
+			return $defaults;
+		}, 11);
+
+		add_action('manage_'.$post_type.'_posts_custom_column', function($column_name, $post_id) use (&$new_columns) {
+			foreach (array_keys($new_columns) as $new_col_key) {
+				if (strtolower(preg_replace('/[^\da-z]/i', '', $new_col_key)) == $column_name) {
+					$col_func = $new_columns[$new_col_key];
+					echo $col_func($post_id);
+				}
+			}
+		}, 10, 2);
+	}
 }
