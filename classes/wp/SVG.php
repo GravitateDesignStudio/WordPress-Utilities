@@ -42,7 +42,11 @@ class SVG {
             $markup = '';
 
             foreach ($svg->childNodes as $child) {
-                $markup .= $child->ownerDocument->saveHTML($child);
+                if (version_compare(PHP_VERSION, '5.3.6') >= 0) {
+                    $markup .= $child->ownerDocument->saveHTML($child);
+                } else {
+                    $markup .= $child->ownerDocument->saveXML($child);
+                }
             }
 
             if ($id && !isset(self::$symbols[$id])) {
