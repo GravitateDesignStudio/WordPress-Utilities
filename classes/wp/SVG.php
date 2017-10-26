@@ -28,7 +28,8 @@ class SVG {
         libxml_use_internal_errors(true);
 
         $dom = new \DOMDocument();
-        $dom->loadHTMLFile($path, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        // $dom->loadHTMLFile($path, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $dom->loadHTMLFile($path);
 
         libxml_use_internal_errors(false);
 
@@ -134,13 +135,26 @@ class SVG {
             return;
         }
 
-        add_action('wp_footer', function() {
-            foreach (self::$use_icon_ids as $icon_id) {
-                echo '<svg style="display:none" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="'.self::$symbols[$icon_id]->viewbox.'" xml:space="preserve"><symbol id="'.$icon_id.'">'.self::$symbols[$icon_id]->markup.'</symbol></svg>';
-            }
-        });
+        // $use_icon_ids = self::$use_icon_ids;
+        // $symbols = self::$symbols;
+
+        // add_action('wp_footer', function() use (&$use_icon_ids, &$symbols) {
+        //     foreach ($use_icon_ids as $icon_id) {
+        //         echo '<svg style="display:none" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="'.$symbols[$icon_id]->viewbox.'" xml:space="preserve"><symbol id="'.$icon_id.'">'.$symbols[$icon_id]->markup.'</symbol></svg>';
+        //     }
+        // });
+
+        add_action('wp_footer', array('\Grav\WP\SVG', 'svg_use_handler'));
 
         self::$use_handler_registered = true;
+    }
+
+    public static function svg_use_handler() {
+        error_log('svg_use_handler');
+
+        foreach (self::$use_icon_ids as $icon_id) {
+            echo '<svg style="display:none" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="'.self::$symbols[$icon_id]->viewbox.'" xml:space="preserve"><symbol id="'.$icon_id.'">'.self::$symbols[$icon_id]->markup.'</symbol></svg>';
+        }
     }
 
     /**
