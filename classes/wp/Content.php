@@ -179,8 +179,13 @@ class Content {
 				{
 					// flatten our multidimensional array and
 					// concatenate it to usable content
-					$results_clean = array_column($results, '0');
-					$content = implode(' ', $results_clean);
+					$content_parts = array();
+
+					foreach ($results as $result) {
+						$content_parts = array_merge($content_parts, $result);
+					}
+
+					$content = implode(' ', $content_parts);
 				}
 				else
 				{
