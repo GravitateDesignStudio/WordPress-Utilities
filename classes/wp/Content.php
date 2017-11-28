@@ -139,10 +139,11 @@ class Content {
 		$excerpt_length = isset($opts['length']) ? $opts['length'] : apply_filters('excerpt_length', 55);
 		$excerpt_more = isset($opts['more']) ? $opts['more'] : apply_filters('excerpt_more', ' ' . '[&hellip;]');
 		$filter_nbsp = isset($opts['filter_nbsp']) ? $opts['filter_nbsp'] : true;
+		$meta_key_match = (isset($opts['meta_key_match']) && is_array($opts['meta_key_match'])) ? $opts['meta_key_match'] : array('grav\_blocks\__\_content', 'grav\_blocks\__\_content\_column\__\_column', 'grav\_blocks\__\_column\__');
 		$post_id = isset($opts['post_id']) ? (int)$opts['post_id'] : get_the_ID();
 		$post = get_post($post_id);
 
-
+		
 		if ($prefer_excerpt && trim($post->post_excerpt))
 		{
 			if ($autop)
@@ -165,8 +166,14 @@ class Content {
 				global $wpdb;
 
 				// prepare our sql query
-				$sql = "SELECT meta_value FROM {$wpdb->postmeta} WHERE (meta_key LIKE 'grav_blocks_%_content' OR meta_key LIKE 'grav_blocks_%_content_column_%_column') AND post_id = {$post_id} LIMIT 10";
+				$meta_key_match = array_map(function($match_str) {
+					return "meta_key LIKE '{$match_str}'";
+				}, $meta_key_match);
 
+				$meta_key_match_str = implode(' OR ', $meta_key_match);
+
+				$sql = "SELECT meta_value FROM {$wpdb->postmeta} WHERE ({$meta_key_match_str}) AND post_id = {$post_id} LIMIT 10";
+				
 				// fetch our results
 				if ($results = $wpdb->get_results($sql, ARRAY_N))
 				{
