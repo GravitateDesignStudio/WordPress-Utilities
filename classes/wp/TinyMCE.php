@@ -2,7 +2,7 @@
 namespace Grav\WP;
 
 class TinyMCE {
-	public static function add_formats($formats) {
+	public static function add_formats($formats, $merge_formats = true) {
 		add_filter('tiny_mce_before_init', function($init_array) use (&$formats) {
 			/*
 			* Each array child is a format with it's own settings
@@ -15,8 +15,15 @@ class TinyMCE {
 
 			// Insert the array, JSON ENCODED, into 'style_formats'
 			$init_array['style_formats'] = json_encode($formats);
+			$init_array['style_formats_merge'] = $merge_formats;
 
 			return $init_array;
+		});
+	}
+
+	public static function set_options($options = array()) {
+		add_filter('tiny_mce_before_init', function($init_array) use (&$options) {
+			return array_merge($init_array, $options);
 		});
 	}
 }

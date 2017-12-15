@@ -10,4 +10,27 @@ class Util {
 
 		return trim($str);
 	}
+
+	public static function include_all_files($path, $filter_func = false) {
+		$files = glob($path);
+		
+		foreach ($files as $file) {
+			if (is_callable($filter_func) && !$filter_func($file)) {
+				continue;
+			}
+
+			include_once($file);
+		}
+	}
+
+	public static function autoflush_rewrite_rules() {
+		add_action('init', function() {
+			$cpts = implode('', get_post_types()).implode('', get_taxonomies());
+			
+			if (get_option('grav_registered_post_types') != $cpts) {
+				flush_rewrite_rules();
+				update_option('grav_registered_post_types', $cpts);
+			}
+		});
+	}
 }

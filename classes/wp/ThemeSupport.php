@@ -10,7 +10,7 @@ class ThemeSupport {
 
         if (!self::$hook_registered) {
             add_action('after_setup_theme', function() {
-                foreach (\WPUtil\ThemeSupport::$support_items as $name => $params) {
+                foreach (\Grav\WP\ThemeSupport::$support_items as $name => $params) {
                     if ($params) {
                         add_theme_support($name, $params);
                     } else {

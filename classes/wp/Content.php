@@ -235,4 +235,16 @@ class Content {
 
 		return trim($content);
 	}
+
+	public static function filter_p_tags_on_images() {
+		$process_func = function($content) {
+			$content = preg_replace('/<p>\s*(<a .*>)?\s*(<img .* \/>)\s*(<\/a>)?\s*<\/p>/iU', '\1\2\3', $content);
+			
+			return preg_replace('/<p>\s*(<iframe .*>*.<\/iframe>)\s*<\/p>/iU', '\1', $content);
+		};
+
+		add_filter('the_content', $process_func);
+		add_filter('the_excerpt', $process_func);
+		add_filter('acf/format_value/type=wysiwyg', $process_func);
+	}
 }
