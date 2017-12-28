@@ -8,7 +8,7 @@ class Media {
 				$mimes[$key] = $value;
 			}
 
-			return $types;
+			return $mimes;
 		});
 	}
 }
