@@ -48,4 +48,21 @@ class GravitateBlocks {
 
 		return $colors;
 	}
+
+	/**
+	 * Sort the order blocks appear in the flexible field dropdown list
+	 * alphabetically
+	 * 
+	 * @since 2018.01.15
+	 * @author DF
+	 */
+	public static function sort_block_names_alphabetically() {
+		add_filter('grav_block_fields', function ($layouts) {
+			uasort($layouts, function($a, $b) {
+				return strcasecmp($a['label'], $b['label']);
+			});
+		
+			return $layouts;
+		}, 1000);
+	}
 }

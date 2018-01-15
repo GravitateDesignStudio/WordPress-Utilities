@@ -27,4 +27,8 @@ class SVGSpriteManager {
 
 		return self::$sprites[$name];
 	}
+
+	static public function get_registered_sprites() {
+		return array_keys(self::$sprites);
+	}
 }
