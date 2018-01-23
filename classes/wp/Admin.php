@@ -118,7 +118,7 @@ class Admin {
 		}, 999);
 	}
 
-	public static function remove_table_columns($post_type, $remove_ids = array()) {
+	public static function remove_table_columns($post_type, $remove_ids = array(), $priority = 10) {
 		add_filter('manage_'.$post_type.'_posts_columns', function($defaults) use (&$remove_ids) {
 			foreach ($remove_ids as $remove_id) {
 				if (isset($defaults[$remove_id])) {
@@ -127,10 +127,10 @@ class Admin {
 			}
 
 			return $defaults;
-		}, 10);
+		}, $priority);
 	}
 
-	public static function add_table_columns($post_type, $new_columns = array()) {
+	public static function add_table_columns($post_type, $new_columns = array(), $priority = 11) {
 		add_filter('manage_'.$post_type.'_posts_columns', function($defaults) use (&$new_columns) {
 			foreach (array_keys($new_columns) as $col_name) {
 				$col_key = strtolower(preg_replace('/[^\da-z]/i', '', $col_name));
@@ -139,7 +139,7 @@ class Admin {
 			}
 
 			return $defaults;
-		}, 11);
+		}, $priority);
 
 		add_action('manage_'.$post_type.'_posts_custom_column', function($column_name, $post_id) use (&$new_columns) {
 			foreach (array_keys($new_columns) as $new_col_key) {
