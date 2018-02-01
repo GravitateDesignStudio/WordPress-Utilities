@@ -213,7 +213,7 @@ class WooCommerce {
 			return '';
 		}
 
-		return get_the_permalink(wc_get_page_id($page));
+		return get_the_permalink(\wc_get_page_id($page));
 	}
 
 	/**
@@ -227,14 +227,14 @@ class WooCommerce {
 	 * @author DF
 	 */
 	public static function get_attribute_taxonomy_name($name) {
-		$wc_attribute_taxonomies = wc_get_attribute_taxonomies();
+		$wc_attribute_taxonomies = \wc_get_attribute_taxonomies();
 
 		if (!$wc_attribute_taxonomies) {
 			return '';
 		}
 
 		foreach ($wc_attribute_taxonomies as $tax) {
-			$tax_name = wc_attribute_taxonomy_name($tax->attribute_name);
+			$tax_name = \wc_attribute_taxonomy_name($tax->attribute_name);
 	
 			if (!$tax_name) {
 				continue;
