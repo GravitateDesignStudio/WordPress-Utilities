@@ -52,10 +52,18 @@ class Geo
 	 * @return (object)
 	 * @author GG
 	 **/
-	public static function address_to_location($address)
+	public static function address_to_location($address, $key = '')
 	{
-		$address = str_replace(' ', '+', urlencode($address));
-		$details_url = 'http://maps.googleapis.com/maps/api/geocode/json?address='.$address.'&sensor=false';
+		$query_parts = array(
+			'address='.str_replace(' ', '+', urlencode($address)),
+			'sensor=false'
+		);
+
+		if ($key) {
+			$query_parts[] = 'key='.$key;
+		}
+
+		$details_url = 'https://maps.googleapis.com/maps/api/geocode/json?'.implode('&', $query_parts);
 
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $details_url);
